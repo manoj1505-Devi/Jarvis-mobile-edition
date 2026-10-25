@@ -23,13 +23,13 @@ lastErr=new Error(data.error.message);
 if(/high demand|temporar|quota|rate|unavailable|no longer
 available|deprecated/i.test(data.error.message)) continue;
 throw lastErr;
-}r
-eturn data.candidates[0].content.parts[0].text;
+}
+return data.candidates[0].content.parts[0].text;
 }catch(e){ lastErr=e; }
-}t
-hrow lastErr;
-} a
-sync function askGemini(p){
+}
+throw lastErr;
+}
+async function askGemini(p){
 add('J.A.R.V.I.S: Thinking...','ai');
 try{
 const reply=await callGemini(p);
@@ -61,5 +61,5 @@ document.getElementById('send').onclick=()=>{
 const t=input.value.trim(); if(!t)return;
 add('YOU: '+t,'user'); input.value=''; askGemini(t);
 };
-function add(t,w){const d=document.createElement('div');d.className='msg
-'+w;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+function add(t,w){const d=document.createElement('div');d.className='msg'
++w;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
