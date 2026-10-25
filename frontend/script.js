@@ -2,8 +2,8 @@ let API_KEY = localStorage.getItem('jarvis_key');
 if(!API_KEY){
 API_KEY = prompt('Enter your Gemini API Key:');
 if(API_KEY) localStorage.setItem('jarvis_key', API_KEY);
-} //
-===== 2. SMART MODELS (ఒకటి fail అయితే next auto try) =====
+} 
+//===== 2. SMART MODELS (ఒకటి fail అయితే next auto try) =====
 const MODELS = ["gemini-3.6-flash", "gemini-flash-latest"];
 const chat=document.getElementById('chat');
 const input=document.getElementById('msg');
@@ -38,8 +38,8 @@ speak(reply); // reply వచి్చన వెంటనే VOICE
 }catch(e){
 chat.lastChild.innerText='J.A.R.V.I.S: ERROR - '+e.message;
 }
-} //
-===== 4. SPEECH RECOGNITION (వినడం) =====
+} 
+//===== 4. SPEECH RECOGNITION (వినడం) =====
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 const rec=new SR(); rec.lang='en-US'; // Telugu కి 'te-IN'
 rec.onresult=(e)=>{const t=e.results[0][0].transcript;add('YOU: '+t,'user');askGemini(t);};
@@ -55,8 +55,8 @@ const u=new SpeechSynthesisUtterance(t);u.rate=1.05; u.pitch=0.85;
 const v=voices.find(v=>v.lang.startsWith('en'));
 if(v) u.voice=v;
 speechSynthesis.speak(u);
-} //
-===== 6. TEXT SEND BUTTON =====
+} 
+//===== 6. TEXT SEND BUTTON =====
 document.getElementById('send').onclick=()=>{
 const t=input.value.trim(); if(!t)return;
 add('YOU: '+t,'user'); input.value=''; askGemini(t);
