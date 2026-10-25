@@ -20,8 +20,7 @@ body:JSON.stringify({contents:[{parts:[{text:p}]}]})});
 const data=await res.json();
 if(data.error){
 lastErr=new Error(data.error.message);
-if(/high demand|temporar|quota|rate|unavailable|no longer
-available|deprecated/i.test(data.error.message)) continue;
+if(/high demand|temporar|quota|rate|unavailable|no longeravailable|deprecated/i.test(data.error.message)) continue;
 throw lastErr;
 }
 return data.candidates[0].content.parts[0].text;
