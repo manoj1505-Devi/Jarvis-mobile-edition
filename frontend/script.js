@@ -38,12 +38,15 @@ speak(reply); // reply వచి్చన వెంటనే VOICE
 chat.lastChild.innerText='J.A.R.V.I.S: ERROR - '+e.message;
 }
 } 
-//===== 4. SPEECH RECOGNITION (వినడం) =====
+//===== 4. SPEECH RECOGNITION =====
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-const rec=new SR(); rec.lang='en-US'; // Telugu కి 'te-IN'
-rec.onresult=(e)=>{const t=e.results[0][0].transcript;add('YOU: '+t,'user');askGemini(t);};
-micBtn.onclick=()=>{rec.start();micBtn.innerText='LISTENING...';};
-rec.onend=()=>{micBtn.innerText='🎙';};
+if(SR && micBtn){
+  const rec=new SR(); rec.lang='en-US'; // Telugu: 'te-IN'
+  rec.onresult=(e)=>{const t=e.results[0][0].transcript;add('YOU: '+t,'user');askGemini(t);};
+  rec.onerror=(e)=>{add('J.A.R.V.I.S: Mic error - '+e.error,'ai');};
+  rec.onend=()=>{micBtn.innerText='🎙️';};
+  micBtn.onclick=()=>{try{rec.start();micBtn.innerText='LISTENING...';}catch(err){}};
+}
 // ===== 5. TEXT-TO-SPEECH (మాటų ాడటం) =====
 let voices=[];
 function loadVoices(){ voices=speechSynthesis.getVoices(); }
